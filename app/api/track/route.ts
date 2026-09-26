@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { savePageView } from "../../../db/owner-dashboard";
 
-const paths = new Set(["/", "/ican-code", "/ican-edit", "/ican-data", "/locations"]);
+const paths = new Set(["/", "/able-code", "/able-edit", "/able-data", "/locations"]);
 const botPattern = /bot|crawler|spider|slurp|headless|preview|facebookexternalhit/i;
 
 export async function POST(request: Request) {

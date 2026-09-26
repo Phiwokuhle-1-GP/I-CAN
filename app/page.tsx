@@ -6,13 +6,14 @@ export default function Home() {
   return <main>
     <section className="home-hero"><div className="container home-grid">
       <div className="home-copy"><p className="eyebrow">CODE · EDIT · DATA</p>
-        <h1>Discover what you <em>can</em> do.</h1>
+        <h1>Discover what you&apos;re <em>able</em> to do.</h1>
         <p>Beginner friendly courses that help you try a new skill, build a real project and find your next step.</p>
         <a className="button button-blue" href="#choose">Choose your course <span aria-hidden="true">↗</span></a>
         <div className="home-facts"><span>No experience needed</span><span>Small groups</span><span>Hands on projects</span></div>
       </div>
       <div className="home-visual"><Image src="/images/hero-person.jpg" alt="Learner working on a laptop" fill priority sizes="(max-width: 800px) 100vw, 48vw" /></div>
     </div></section>
+    <div className="brand-feature"><Image src="/images/able-wordmark.svg" alt="ABLE — Code, Edit, Data" fill sizes="100vw" /></div>
     <section className="chooser container" id="choose">
       <div className="section-heading"><p className="eyebrow">YOUR STARTING POINT</p><h2>Choose your course</h2><p>Three practical introductions. Pick the skill you want to explore first.</p></div>
       <div className="course-grid">{courses.map((course) => <Link className={"choose-card "+course.accent} key={course.slug} href={"/"+course.slug}>

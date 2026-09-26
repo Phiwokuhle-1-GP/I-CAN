@@ -1,11 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { courses } from "../courses";
+import { getCourse } from "../courses";
 import type { EnquiryRecord, EnquiryStatus } from "../../db/owner-dashboard";
 
 const filters = ["All", "New", "Contacted", "Closed"] as const;
-function courseName(slug: string) { return courses.find(course => course.slug === slug)?.name ?? slug; }
+function courseName(slug: string) { return getCourse(slug)?.name ?? slug; }
 function nextStatus(status: EnquiryStatus): EnquiryStatus { return status === "New" ? "Contacted" : status === "Contacted" ? "Closed" : "New"; }
 function nextLabel(status: EnquiryStatus) { return status === "New" ? "Mark contacted" : status === "Contacted" ? "Close enquiry" : "Reopen"; }
 

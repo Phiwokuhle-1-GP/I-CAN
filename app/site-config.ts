@@ -1,1 +1,1 @@
-export const siteOrigin = "https://i-can-course-pages.phiwokuhlehlase.chatgpt.site";
+export const siteOrigin = "https://able-courses.phiwokuhlehlase.chatgpt.site";

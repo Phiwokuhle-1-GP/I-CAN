@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { courses, getCourse } from "../courses";
 import { siteOrigin } from "../site-config";
 import EnquiryForm from "../enquiry-form";
@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{slug: stri
   return {
     title: course.seoTitle,
     description: course.seoDescription,
-    alternates: { canonical: "/"+slug },
-    openGraph: { type: "website", siteName: "I CAN", title: course.seoTitle, description: course.seoDescription, url: siteOrigin+"/"+slug },
+    alternates: { canonical: "/"+course.slug },
+    openGraph: { type: "website", siteName: "ABLE", title: course.seoTitle, description: course.seoDescription, url: siteOrigin+"/"+course.slug },
   };
 }
 
@@ -24,7 +24,8 @@ export default async function CoursePage({ params }: { params: Promise<{slug: st
   const { slug } = await params;
   const course = getCourse(slug);
   if (!course) notFound();
-  const schema = { "@context": "https://schema.org", "@type": "Course", name: course.name, description: course.description, provider: { "@type": "Organization", name: "I CAN" }, url: siteOrigin+"/"+slug, educationalLevel: "Beginner" };
+  if (slug !== course.slug) permanentRedirect("/"+course.slug);
+  const schema = { "@context": "https://schema.org", "@type": "Course", name: course.name, description: course.description, provider: { "@type": "Organization", name: "ABLE" }, url: siteOrigin+"/"+course.slug, educationalLevel: "Beginner" };
   return <main className={"course-page "+course.accent}>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
     <section className="course-hero"><div className="container hero-layout">
@@ -36,7 +37,7 @@ export default async function CoursePage({ params }: { params: Promise<{slug: st
       <div className="hero-image"><Image src="/images/hero-person.jpg" alt="Learner working at a laptop" fill priority sizes="(max-width: 800px) 100vw, 48vw" /><div className="hero-stamp"><strong>4 weeks</strong><span>2 × 90-minute sessions / week</span><b>R1,500</b></div></div>
     </div></section>
 
-    <section className="course-switch container" aria-label="Explore I CAN courses"><span>Explore another course</span><div>{courses.map(item => <Link key={item.slug} href={"/"+item.slug} aria-current={item.slug === slug ? "page" : undefined}>{item.name}</Link>)}</div></section>
+    <section className="course-switch container" aria-label="Explore ABLE courses"><span>Explore another course</span><div>{courses.map(item => <Link key={item.slug} href={"/"+item.slug} aria-current={item.slug === slug ? "page" : undefined}>{item.name}</Link>)}</div></section>
 
     <section className="learn-section" id="learn"><div className="container learn-layout"><div className="section-heading left"><p className="eyebrow">WHAT YOU&apos;LL LEARN</p><h2>Practical skills.<br />Clear steps.</h2><p>{course.description}</p></div><ol className="skill-grid">{course.skills.map((skill, index) => <li key={skill}><span>{String(index + 1).padStart(2, "0")}</span><strong>{skill}</strong></li>)}</ol></div></section>
 

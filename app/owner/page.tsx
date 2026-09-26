@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { courses } from "../courses";
+import { courses, courseSlugs } from "../courses";
 import { requireOwnerPage } from "../owner-auth";
 import { getDashboardData } from "../../db/owner-dashboard";
 import EnquiryInbox from "./enquiry-inbox";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
-  title: "Owner dashboard | I CAN",
+  title: "Owner dashboard | ABLE",
   robots: {index: false, follow: false},
 };
 
@@ -21,7 +21,7 @@ export default async function OwnerPage() {
   try { data = await getDashboardData(); }
   catch (error) {
     console.error("Owner dashboard load failed", error);
-    return <main className="owner-shell container"><div className="owner-head"><div><p className="eyebrow">I CAN OWNER</p><h1>Dashboard</h1></div><Link href="/">View site →</Link></div><div className="owner-error">The dashboard is temporarily unavailable. Please refresh in a moment.</div></main>;
+    return <main className="owner-shell container"><div className="owner-head"><div><p className="eyebrow">ABLE OWNER</p><h1>Dashboard</h1></div><Link href="/">View site →</Link></div><div className="owner-error">The dashboard is temporarily unavailable. Please refresh in a moment.</div></main>;
   }
 
   const today = new Date();
@@ -33,7 +33,7 @@ export default async function OwnerPage() {
   const peak = Math.max(1, ...daily.map(row => row.views));
   return <main className="owner-shell">
     <div className="container">
-      <div className="owner-head"><div><p className="eyebrow">I CAN OWNER</p><h1>Enquiries & analytics</h1><p>Welcome, {owner.displayName}. Track interest and follow up with learners.</p></div><Link className="owner-site-link" href="/">View site →</Link></div>
+      <div className="owner-head"><div><p className="eyebrow">ABLE OWNER</p><h1>Enquiries & analytics</h1><p>Welcome, {owner.displayName}. Track interest and follow up with learners.</p></div><Link className="owner-site-link" href="/">View site →</Link></div>
       <section className="owner-metrics" aria-label="Last 30 days overview">
         <article><span>New enquiries</span><strong>{data.newEnquiries}</strong><small>All time, awaiting follow-up</small></article>
         <article><span>Enquiries</span><strong>{data.enquiries30d}</strong><small>Last 30 days</small></article>
@@ -53,8 +53,9 @@ export default async function OwnerPage() {
       </section>
       <section className="owner-panel course-panel"><div className="panel-head"><div><p className="eyebrow">COURSES</p><h2>Interest by course</h2></div><span>Last 30 days</span></div><div className="course-performance">
         {courses.map(course => {
-          const views = data.courseViews.find(row => row.path === "/"+course.slug)?.views ?? 0;
-          const enquiries = data.courseEnquiries.find(row => row.course === course.slug)?.enquiries ?? 0;
+          const slugs = courseSlugs(course.slug);
+          const views = data.courseViews.filter(row => slugs.includes(row.path.slice(1))).reduce((sum, row) => sum + row.views, 0);
+          const enquiries = data.courseEnquiries.filter(row => slugs.includes(row.course)).reduce((sum, row) => sum + row.enquiries, 0);
           return <div key={course.slug}><strong>{course.name}</strong><span>{views} views</span><span>{enquiries} enquiries</span><Link href={"/"+course.slug}>View page →</Link></div>;
         })}
       </div></section>

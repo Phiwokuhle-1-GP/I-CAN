@@ -33,9 +33,10 @@ button { cursor:pointer; }
 .site-header { background:#041422; color:#fff; position:relative; z-index:5; }
 .nav-inner { min-height:76px; display:flex; align-items:center; gap:36px; }
 .brand { color:#fff; text-decoration:none; display:grid; line-height:.94; white-space:nowrap; }
-.brand strong { font-size:32px; letter-spacing:.19em; font-weight:900; }
-.brand strong span { color:#0d91ff; }
-.brand small { font-size:9px; letter-spacing:.26em; margin-top:8px; font-weight:700; }
+.brand strong { font-size:32px; letter-spacing:.015em; font-weight:900; }
+.brand strong .brand-white { color:#fff; }
+.brand strong .brand-blue,.brand small b { color:#0d91ff; }
+.brand small { font-size:9px; letter-spacing:.25em; margin-top:7px; font-weight:700; }
 .site-header nav { display:flex; gap:30px; margin-left:auto; }
 .site-header nav a { text-decoration:none; font-weight:700; font-size:14px; }
 .site-header nav a:hover,.plain-link:hover { color:#65bdff; }
@@ -56,6 +57,8 @@ button { cursor:pointer; }
 .home-facts span:before,.hero-proof span:before { content:"✓"; color:#5bbdff; font-size:19px; }
 .home-visual,.hero-image { height:510px; position:relative; align-self:stretch; }
 .home-visual img,.hero-image img { object-fit:cover; object-position:center 45%; mask-image:linear-gradient(90deg,transparent 0%,#000 18%); }
+.brand-feature { height:clamp(185px,24vw,295px); position:relative; background:#031827; overflow:hidden; }
+.brand-feature img { object-fit:cover; object-position:center center; }
 .chooser { padding-top:72px; padding-bottom:86px; }
 .section-heading { text-align:center; }
 .section-heading .eyebrow { color:#087aff; }
@@ -151,6 +154,7 @@ button { cursor:pointer; }
 .site-footer { background:#03101d; color:#d1dce8; padding:30px 0; }
 .footer-inner { display:flex; align-items:center; gap:20px; }
 .footer-brand { color:#fff; font-size:22px; font-weight:900; letter-spacing:.13em; text-decoration:none; }
+.footer-brand span { color:#0d91ff; }
 .footer-inner p { margin:0; }
 .footer-inner span { margin-left:auto; font-size:13px; }
 @media(max-width:900px) {
@@ -167,6 +171,7 @@ button { cursor:pointer; }
   .nav-inner { min-height:70px; gap:15px; }
   .brand strong { font-size:26px; }
   .brand small { font-size:7px; }
+  .brand-feature { height:180px; }
   .site-header nav { margin-left:auto; gap:14px; }
   .site-header nav a { font-size:13px; }
   .nav-cta { display:none; }
@@ -184,6 +189,7 @@ button { cursor:pointer; }
   .footer-inner span { margin-left:0; }
 }
 @media(max-width:480px) {
+  .brand-feature { height:135px; }
   .home-copy,.hero-content { padding-top:42px; }
   .hero-content h1 { font-size:48px; }
   .hero-content h2 { font-size:25px; }
