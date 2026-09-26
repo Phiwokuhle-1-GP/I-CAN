@@ -29,7 +29,7 @@ export default function EnquiryForm({ course }: {course: Course}) {
     <label>Full name <input name="name" autoComplete="name" required minLength={2} maxLength={100} placeholder="Your name" /></label>
     <label>Email address <input name="email" type="email" autoComplete="email" required maxLength={180} placeholder="you@example.com" /></label>
     <label>Phone or WhatsApp <span className="optional">optional</span><input name="phone" type="tel" autoComplete="tel" maxLength={40} placeholder="Your number" /></label>
-    <label>Anything you&apos;d like to ask? <span className="optional">optional</span><textarea name="message" rows={3} maxLength={1000} placeholder="A question about the course or next class" /></label>
+    <label>Your area or a question <span className="optional">optional</span><textarea name="message" rows={3} maxLength={1000} placeholder="For example, Randburg—are in-person classes available?" /></label>
     <div className="trap" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
     {state === "error" && <p className="form-error" role="alert">{error}</p>}
     <button className="button accent-button form-submit" type="submit" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send course enquiry →"}</button>

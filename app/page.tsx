@@ -22,6 +22,7 @@ export default function Home() {
         <strong>Explore the course <span aria-hidden="true">→</span></strong>
       </Link>)}</div>
     </section>
+    <section className="home-locations"><div className="container home-locations-inner"><div><p className="eyebrow">LEARN FROM WHERE YOU ARE</p><h2>Johannesburg to Cape Town.</h2><p>Join online from Randburg, Sandton, Rosebank, Cape Town or elsewhere in South Africa. Ask about current in-person class availability.</p></div><Link href="/locations">Explore locations & formats →</Link></div></section>
     <section className="home-bottom"><div className="container bottom-grid"><div><p className="eyebrow">A CLEAR FIRST STEP</p><h2>Learn it. Try it. Build it.</h2></div><p>Each course runs for four weeks with two 90-minute sessions per week and a small group of up to 10 learners. Online and in-person options are available.</p></div></section>
   </main>;
 }

@@ -8,4 +8,13 @@ export const enquiries = sqliteTable("enquiries", {
   phone: text("phone"),
   course: text("course").notNull(),
   message: text("message"),
+  status: text("status").notNull().default("New"),
+});
+
+export const pageViews = sqliteTable("page_views", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  createdAt: text("created_at").notNull(),
+  path: text("path").notNull(),
+  source: text("source").notNull(),
+  campaign: text("campaign"),
 });
